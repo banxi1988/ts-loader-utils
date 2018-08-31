@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const loaderUtils = require("../");
+const loaderUtils = require("../dist");
 
 function ExpectedError(regex) {
 	this.regex = regex;
@@ -43,14 +43,14 @@ describe("isUrlRequest()", () => {
 
 		// empty url
 		[[""], true, "should be positive if url is empty"]
-	].forEach((test) => {
+	].forEach(test => {
 		it(test[2], () => {
 			const expected = test[1];
 			try {
 				const request = loaderUtils.isUrlRequest.apply(loaderUtils, test[0]);
 				assert.equal(request, expected);
-			} catch(e) {
-				if(expected instanceof ExpectedError) {
+			} catch (e) {
+				if (expected instanceof ExpectedError) {
 					assert.ok(expected.matches(e));
 				} else {
 					assert.ok(false, "should not have thrown an error: " + e.message);

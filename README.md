@@ -1,4 +1,4 @@
-# loader-utils
+# loader-utils (reimplmented with TypeScript)
 
 ## Methods
 

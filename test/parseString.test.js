@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const loaderUtils = require("../");
+const loaderUtils = require("../dist");
 
 describe("parseString()", () => {
 	[

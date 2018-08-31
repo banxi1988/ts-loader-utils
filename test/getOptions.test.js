@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const loaderUtils = require("../lib");
+const loaderUtils = require("../dist");
 
 describe("getOptions()", () => {
 	describe("when loaderContext.query is a string with length > 0", () => {

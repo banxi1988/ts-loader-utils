@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const loaderUtils = require("../");
+const loaderUtils = require("../dist");
 
 function ExpectedError(regex) {
 	this.regex = regex;
@@ -41,14 +41,14 @@ describe("urlToRequest()", () => {
 		[["a:b-not-\\window-path"], "./a:b-not-\\window-path", "should not incorrectly detect windows paths"],
 		// empty url
 		[[""], "", "should do nothing if url is empty"]
-	].forEach((test) => {
+	].forEach(test => {
 		it(test[2], () => {
 			const expected = test[1];
 			try {
 				const request = loaderUtils.urlToRequest.apply(loaderUtils, test[0]);
 				assert.equal(request, expected);
-			} catch(e) {
-				if(expected instanceof ExpectedError) {
+			} catch (e) {
+				if (expected instanceof ExpectedError) {
 					assert.ok(expected.matches(e));
 				} else {
 					assert.ok(false, "should not have thrown an error: " + e.message);

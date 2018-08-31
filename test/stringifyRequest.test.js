@@ -2,7 +2,7 @@
 
 const assert = require("assert");
 const path = require("path");
-const loaderUtils = require("../");
+const loaderUtils = require("../dist");
 
 const s = JSON.stringify;
 
@@ -10,11 +10,13 @@ describe("stringifyRequest()", () => {
 	// We know that query strings that contain paths and question marks can be problematic.
 	// We must ensure that stringifyRequest is not messing with them
 	const paramQueryString = "?questionMark?posix=path/to/thing&win=path\\to\\thing";
-	const jsonQueryString = "?" + s({
-		questionMark: "?",
-		posix: "path/to/thing",
-		win: "path\\to\\file"
-	});
+	const jsonQueryString =
+		"?" +
+		s({
+			questionMark: "?",
+			posix: "path/to/thing",
+			win: "path\\to\\file"
+		});
 	[
 		{ test: 1, request: "./a.js", expected: s("./a.js") },
 		{ test: 2, request: ".\\a.js", expected: s("./a.js") },
@@ -52,52 +54,37 @@ describe("stringifyRequest()", () => {
 		},
 		{
 			test: 21,
-			request:
-				["./a.js", "./b.js", "./c.js"].join("!"),
-			expected: s(
-				["./a.js", "./b.js", "./c.js"].join("!")
-			)
+			request: ["./a.js", "./b.js", "./c.js"].join("!"),
+			expected: s(["./a.js", "./b.js", "./c.js"].join("!"))
 		},
 		{
 			test: 22,
-			request:
-				["a/b.js", "c/d.js", "e/f.js", "g"].join("!"),
-			expected: s(
-				["a/b.js", "c/d.js", "e/f.js", "g"].join("!")
-			)
+			request: ["a/b.js", "c/d.js", "e/f.js", "g"].join("!"),
+			expected: s(["a/b.js", "c/d.js", "e/f.js", "g"].join("!"))
 		},
 		{
 			test: 23,
-			request:
-				["a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "e/f.js"].join("!"),
-			expected: s(
-				["a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "e/f.js"].join("!")
-			)
+			request: ["a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "e/f.js"].join("!"),
+			expected: s(["a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "e/f.js"].join("!"))
 		},
 		{
 			test: 24,
 			os: "posix",
 			context: "/path/to",
-			request:
-				["/a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "/path/to/e/f.js"].join("!"),
-			expected: s(
-				["../../a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "./e/f.js"].join("!")
-			)
+			request: ["/a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "/path/to/e/f.js"].join("!"),
+			expected: s(["../../a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "./e/f.js"].join("!"))
 		},
 		{
 			test: 25,
 			os: "win32",
 			context: "C:\\path\\to\\",
-			request:
-				["C:\\a\\b.js" + paramQueryString, "c\\d.js" + jsonQueryString, "C:\\path\\to\\e\\f.js"].join("!"),
-			expected: s(
-				["../../a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "./e/f.js"].join("!")
-			)
+			request: ["C:\\a\\b.js" + paramQueryString, "c\\d.js" + jsonQueryString, "C:\\path\\to\\e\\f.js"].join("!"),
+			expected: s(["../../a/b.js" + paramQueryString, "c/d.js" + jsonQueryString, "./e/f.js"].join("!"))
 		}
 	].forEach(testCase => {
-		it(`${ testCase.test }. should stringify request ${ testCase.request } to ${ testCase.expected } inside context ${ testCase.context }`, () => {
+		it(`${testCase.test}. should stringify request ${testCase.request} to ${testCase.expected} inside context ${testCase.context}`, () => {
 			const relative = path.relative;
-			if(testCase.os) {
+			if (testCase.os) {
 				// monkey patch path.relative in order to make this test work in every OS
 				path.relative = path[testCase.os].relative;
 			}
