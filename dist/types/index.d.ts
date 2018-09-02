@@ -8,4 +8,16 @@ import urlToRequest from "./urlToRequest";
 import parseString from "./parseString";
 import getHashDigest from "./getHashDigest";
 import interpolateName from "./interpolateName";
-export { getOptions, parseQuery, stringifyRequest, getRemainingRequest, getCurrentRequest, isUrlRequest, urlToRequest, parseString, getHashDigest, interpolateName };
+declare const defaults: {
+    getOptions: typeof getOptions;
+    parseQuery: typeof parseQuery;
+    stringifyRequest: typeof stringifyRequest;
+    getRemainingRequest: typeof getRemainingRequest;
+    getCurrentRequest: typeof getCurrentRequest;
+    isUrlRequest: typeof isUrlRequest;
+    urlToRequest: typeof urlToRequest;
+    parseString: typeof parseString;
+    getHashDigest: typeof getHashDigest;
+    interpolateName: typeof interpolateName;
+};
+export = defaults;

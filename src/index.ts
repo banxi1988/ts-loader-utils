@@ -11,4 +11,17 @@ import parseString from "./parseString";
 import getHashDigest from "./getHashDigest";
 import interpolateName from "./interpolateName";
 
-export { getOptions, parseQuery, stringifyRequest, getRemainingRequest, getCurrentRequest, isUrlRequest, urlToRequest, parseString, getHashDigest, interpolateName };
+const defaults = {
+  getOptions,
+  parseQuery,
+  stringifyRequest,
+  getRemainingRequest,
+  getCurrentRequest,
+  isUrlRequest,
+  urlToRequest,
+  parseString,
+  getHashDigest,
+  interpolateName
+};
+
+export = defaults;

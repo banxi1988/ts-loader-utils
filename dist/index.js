@@ -2,24 +2,26 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const getOptions_1 = __importDefault(require("./getOptions"));
-exports.getOptions = getOptions_1.default;
 const parseQuery_1 = __importDefault(require("./parseQuery"));
-exports.parseQuery = parseQuery_1.default;
 const stringifyRequest_1 = __importDefault(require("./stringifyRequest"));
-exports.stringifyRequest = stringifyRequest_1.default;
 const getRemainingRequest_1 = __importDefault(require("./getRemainingRequest"));
-exports.getRemainingRequest = getRemainingRequest_1.default;
 const getCurrentRequest_1 = __importDefault(require("./getCurrentRequest"));
-exports.getCurrentRequest = getCurrentRequest_1.default;
 const isUrlRequest_1 = __importDefault(require("./isUrlRequest"));
-exports.isUrlRequest = isUrlRequest_1.default;
 const urlToRequest_1 = __importDefault(require("./urlToRequest"));
-exports.urlToRequest = urlToRequest_1.default;
 const parseString_1 = __importDefault(require("./parseString"));
-exports.parseString = parseString_1.default;
 const getHashDigest_1 = __importDefault(require("./getHashDigest"));
-exports.getHashDigest = getHashDigest_1.default;
 const interpolateName_1 = __importDefault(require("./interpolateName"));
-exports.interpolateName = interpolateName_1.default;
+const defaults = {
+    getOptions: getOptions_1.default,
+    parseQuery: parseQuery_1.default,
+    stringifyRequest: stringifyRequest_1.default,
+    getRemainingRequest: getRemainingRequest_1.default,
+    getCurrentRequest: getCurrentRequest_1.default,
+    isUrlRequest: isUrlRequest_1.default,
+    urlToRequest: urlToRequest_1.default,
+    parseString: parseString_1.default,
+    getHashDigest: getHashDigest_1.default,
+    interpolateName: interpolateName_1.default
+};
+module.exports = defaults;
